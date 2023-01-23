@@ -1,27 +1,49 @@
-// TODO: Declare any global variables we need
+
+let tailsCounter=0;
+let headsCounter=0;
+let tailsPercent=0;
+let headsPercent=0;
+let totalCounter = tailsCounter+headsCounter;
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    // This is just a sanity check to make sure your JavaScript script is getting loaded
-    // You can remove it once you see it in your browser console in the developer tools
-    console.log('Hi')
-
-    // TODO: Add event listener and handler for flip and clear buttons
-
-    // Flip Button Click Handler
-        // TODO: Determine flip outcome
-        // TODO: Update image and status message in the DOM
-
-        // Update the scorboard
-        // TODO: Calculate the total number of rolls/flips
-        // Make variables to track the percentages of heads and tails
-        // TODO: Use the calculated total to calculate the percentages
-        // HINT: Make sure not to divide by 0! (if total is 0, percent will be 0 as well)
-        // TODO: Update the display of each table cell
-
-
-    // Clear Button Click Handler
-        // TODO: Reset global variables to 0
-        // TODO: Update the scoreboard (same logic as in flip button click handler)
-
+document.querySelector('#button2').addEventListener('click',function(){
+    document.getElementById('img').src="https://via.placeholder.com/200";
+    document.querySelector('#theFlip').textContent = 'Result:';
+    document.querySelector('#heads').textContent = 0;
+    document.querySelector('#tails').textContent = 0;
+    document.querySelector('#heads-percent').textContent = 0+'%';
+    document.querySelector('#tails-percent').textContent = 0+'%';
 })
+
+document.querySelector('#button1').addEventListener('click',function(){
+    callFlip();
+    totalCounter = tailsCounter+headsCounter;
+    tailsPercent = tailsCounter/totalCounter * 100;
+    headsPercent = headsCounter/totalCounter * 100;
+    let h = headsPercent.toFixed();
+    let t = tailsPercent.toFixed();
+
+    document.querySelector('#heads-percent').textContent = h+'%';
+    document.querySelector('#tails-percent').textContent = t+'%';
+})
+
+
+async function callFlip(){
+    let flipResult = (Math.floor(Math.random() * 2));
+    
+    if (flipResult===1){
+        //It's Tails!!!
+        document.querySelector('#theFlip').textContent = 'It is Tails!!';
+        document.getElementById('img').src="./assets/images/penny-tails.jpg";
+        tailsCounter++;
+        document.querySelector('#tails').textContent = tailsCounter;
+    } else if (flipResult===0){
+        //It's Heads!!!
+        document.querySelector('#theFlip').textContent = 'It is Heads!!';
+        document.getElementById('img').src="./assets/images/penny-heads.jpg";
+        headsCounter++;
+        document.querySelector('#heads').textContent = headsCounter;
+    }
+
+}
+
